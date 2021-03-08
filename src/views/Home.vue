@@ -13,7 +13,7 @@
           </ul>
   </div>
   <input type="text" id="name" name="name" v-model="newTodo">
-  <button v-on:click="add()">ajout</button>
+  <button v-on:click="add()">ajouter</button>
 </template>
 
 <script>
