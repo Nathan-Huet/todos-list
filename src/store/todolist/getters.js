@@ -5,3 +5,7 @@ export function myGetter(state) {
 export function todos(state) {
     return state.todos;
 }
+
+export const getTodo = (state) => (todoid) => {
+    return state.todos.find((todo) => todo.id === todoid);
+}
