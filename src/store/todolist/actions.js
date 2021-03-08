@@ -6,9 +6,6 @@ export function removeTodo(store, todo){
     store.commit('remove_todo',todo)
 }
 
-export function editTodo(store, todo, edit_todo){
-    console.log('action')
-    console.log(todo)
-    console.log(edit_todo)
-    store.commit('edit_todo',todo, edit_todo)
+export function editTodo(store, payload){
+    store.commit('edit_todo',payload)
 }

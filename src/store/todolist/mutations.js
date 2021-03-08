@@ -17,9 +17,7 @@ export function remove_todo(state,todo){
     state.todos.splice(i, 1);
 }
 
-export function edit_todo(state,todo,edit_todo='TestMut'){
-    let i = state.todos.map(item => item.id).indexOf(todo.id);
-    console.log('mutation')
-    console.log(edit_todo);
-    state.todos[i].name = edit_todo;
+export function edit_todo(state,payload){
+    let i = state.todos.map(item => item.id).indexOf(payload.todo.id);
+    state.todos[i].name = payload.editingTodo;
 }

@@ -46,8 +46,8 @@ export default {
         this.removeTodo(todo)
       },
       edit(todo){
-        console.log(this.editingTodo)
-        this.editTodo(todo,this.editingTodo)
+        var payload = {'todo': todo, 'editingTodo': this.editingTodo}
+        this.editTodo(payload)
       }
   },
 
