@@ -1,0 +1,27 @@
+<div class="main">
+          <!--<input type="checkbox" class="toggle-all" v-on:change="allDone()" v-model="allDoneBool">
+          Check <span v-show="allDoneBool">All</span>
+          <span v-show="!allDoneBool">None</span>-->
+          <ul class="todo-list">
+            <li v-for="(item,index) in filterTodos" :key="item.id"  >
+              {{ item.name }}
+              <input type="checkbox" id="checkbox" v-model="item.completed">
+              <button v-on:click="del(index)">Delete</button>
+            </li>
+          </ul>
+  </div>
+    <input type="text" id="name" name="name" v-model="newTodo">
+    <button v-on:click="ajout()">ajout</button>
+    <!--v-show="hasTodos"-->
+    <footer class="footer" >
+      <ul class="filters">
+          <button v-on:click="this.filter='all'">all</button>
+          <button v-on:click="this.filter='done'">done</button>
+          <button v-on:click="this.filter='todo'">notDone</button>
+          <!--<li><a href="" v-bind:class="{selected: filter === 'all'}" @click.prevent="filter = 'all'" >Toutes</a></li>
+          <li><a href="" v-bind:class="{selected: filter === 'all'}" @click.prevent="filter = 'todo'" > A faire</a></li>
+          <li><a href="" v-bind:class="{selected: filter === 'all'}" @click.prevent="filter = 'done'" > Faites </a></li>
+          -->
+      </ul> 
+      <button class="clear-completed" v-show="completed" @click.prevent="deleteCompleted">Supprimer les tâches finies</button>         
+    </footer>
