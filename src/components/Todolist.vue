@@ -1,7 +1,7 @@
 <template>
     ID: {{ todolist.id }}
     <ul>
-        <li v-for="todo in todolist.todos" v-bind:key="todo.id">
+        <li v-for="todo in filterToDo" v-bind:key="todo.id">
             <todo :id="todo.id" :todolistid="todolist.id" @remove="remove"></todo>
         </li>
         <input type="text" id="name" name="name" v-model="newTodo">
@@ -23,7 +23,8 @@ import ItemTodo from './ItemTodo.vue';
             }
         },
         props: {
-            id: {type: String, default: "1"}
+            id: {type: String, default: "1"},
+            filter: {type: String, default: "all"}
         },
         components:{
             todo : ItemTodo,
@@ -48,7 +49,18 @@ import ItemTodo from './ItemTodo.vue';
 
             todolist(){
                 return this.getTodolist(this.id)
-            }
+            },
+
+            filterToDo() {
+                if (this.filter === "all") {
+                    return this.todolist.todos;
+                } else if (this.filter === "done") {
+                    return this.todolist.todos.filter((todo) => todo.completed);
+                } else if (this.filter === "notDone") {
+                    return this.todolist.todos.filter((todo) => !todo.completed);
+                }
+                return [];
+            },
         }
 
 

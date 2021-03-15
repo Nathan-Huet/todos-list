@@ -10,6 +10,11 @@ export function editTodo(store, payload){
     store.commit('edit_todo',payload)
 }
 
+export function completeTodo(store, payload){
+    store.commit('complete_Todo',payload)
+}
+
 export function addTodolist(store){
     store.commit('add_todolist')
 }
+
