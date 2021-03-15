@@ -57,7 +57,6 @@ export default {
   },
 
   computed: {
-      ...mapGetters("todolist", ['myGetter']),
       ...mapGetters("todolist", ['todolists'])
     }
 }
