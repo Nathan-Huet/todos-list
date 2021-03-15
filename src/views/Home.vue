@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    Il y a {{ myGetter }} todos
+    Il y a {{ myGetter }} todolist
    <!-- <ul class="todo-list">
             <li v-for="todo in todos" :key="todo.id"  >
               {{ todo.name }}
@@ -13,20 +13,31 @@
           </ul>
   </div>-->
   <ul>
-    <li v-for="todo in todos" v-bind:key="todo.id">
-        <todo :id="todo.id" @remove="remove"></todo>
+    <li v-for="todolist in todolists" v-bind:key="todolist.id">
+      <todolist :id="todolist.id"></todolist>
     </li>
   </ul>
-  <input type="text" id="name" name="name" v-model="newTodo">
-  <button v-on:click="add()">ajouter</button>
+  <!--<ul>
+    <li v-for="(todolist,index) in todolists" v-bind:key="index">
+      <ul>
+        <li v-for="todo in todolist" v-bind:key="todo.id">
+          
+          <todo :id="todo.id" @remove="remove"></todo>
+        </li>
+      </ul>
+        <input type="text" id="name" name="name" v-model="newTodo">
+        <button v-on:click="add()">ajouter</button>   
+    </li>
+  </ul>
+  -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
-import { mapGetters, mapActions } from "vuex";
-import ItemTodo from '@/components/ItemTodo.vue';
+import { mapGetters } from "vuex";
+import Todolist from '@/components/Todolist.vue';
 
 export default {
   name: 'Home',
@@ -37,24 +48,17 @@ export default {
       }
   },
   components: {
-    todo : ItemTodo
+    todolist : Todolist
   },
 
+
   methods:{
-      ...mapActions("todolist",{addTodo : 'addTodo'}),
-      ...mapActions("todolist",{removeTodo : 'removeTodo'}),
-      add(){
-        this.addTodo(this.newTodo)
-        this.newTodo = ''
-      },
-      remove(todo){
-        this.removeTodo(todo)
-      },
+      
   },
 
   computed: {
       ...mapGetters("todolist", ['myGetter']),
-      ...mapGetters("todolist", ['todos'])
+      ...mapGetters("todolist", ['todolists'])
     }
 }
 </script>

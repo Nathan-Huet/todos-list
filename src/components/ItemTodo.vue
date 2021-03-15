@@ -18,7 +18,8 @@ import { mapGetters, mapActions } from "vuex";
             }
         },
         props: {
-            id: {type: String, default: "1"}
+            id: {type: String, default: "1"},
+            todolistid: {type: String, default: "1"},
         },
         methods:{
             ...mapActions("todolist",{editTodo : 'editTodo'}),
@@ -26,7 +27,7 @@ import { mapGetters, mapActions } from "vuex";
                 this.$emit('remove',this.id)
             },
             edit(todo){
-                var payload = {'todo': todo, 'editingTodo': this.editingTodo}
+                var payload = {'todo': todo, 'editingTodo': this.editingTodo,'todolist_id' : this.todolistid}
                 this.editTodo(payload)
             }
         },
@@ -34,7 +35,7 @@ import { mapGetters, mapActions } from "vuex";
             ...mapGetters('todolist', ['getTodo']),
 
             todo(){
-                return this.getTodo(this.id)
+                return this.getTodo(this.todolistid,this.id)
             }
         }
 
