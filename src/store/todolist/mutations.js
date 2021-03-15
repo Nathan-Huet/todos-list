@@ -12,6 +12,13 @@ export function add_todo(state, payload){
     })
 }
 
+export function add_todolist(state){
+    state.todolists.push({
+        id : state.todolists.length +1,
+        todos : [],
+    })
+}
+
 //stackOverflow
 export function remove_todo(state,payload){
     var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);

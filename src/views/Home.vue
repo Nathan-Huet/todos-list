@@ -12,6 +12,7 @@
             </li>
           </ul>
   </div>-->
+  <button v-on:click="addTodolist()">ajouter une Todolist</button>   
   <ul>
     <li v-for="todolist in todolists" v-bind:key="todolist.id">
       <todolist :id="todolist.id"></todolist>
@@ -36,7 +37,7 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Todolist from '@/components/Todolist.vue';
 
 export default {
@@ -53,7 +54,11 @@ export default {
 
 
   methods:{
-      
+    ...mapActions("todolist",{add_Todolist : 'addTodolist'}),
+    addTodolist(){
+      this.add_Todolist();
+    }
+
   },
 
   computed: {
