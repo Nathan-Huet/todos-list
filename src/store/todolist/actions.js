@@ -1,9 +1,9 @@
-export function addTodo(store,name){
-    store.commit('add_todo',name)
+export function addTodo(store,payload){
+    store.commit('add_todo',payload)
 }
 
-export function removeTodo(store, todo){
-    store.commit('remove_todo',todo)
+export function removeTodo(store, payload){
+    store.commit('remove_todo',payload)
 }
 
 export function editTodo(store, payload){

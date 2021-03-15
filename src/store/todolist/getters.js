@@ -1,11 +1,17 @@
 export function myGetter(state) {
-    return state.todos.length;
+    return state.todolists.length;
 }
 
-export function todos(state) {
-    return state.todos;
+export function todolists(state) {
+    return state.todolists;
 }
 
-export const getTodo = (state) => (todoid) => {
-    return state.todos.find((todo) => todo.id === todoid);
+export const getTodo = (state) => (todolistid,todoid) => {
+    var todolist = state.todolists.find((todolist) => todolist.id === todolistid);
+    var todo = todolist.todos.find((todo) => todo.id === todoid);
+    return todo;
+}
+
+export const getTodolist = (state) => (todolistid) => {
+    return state.todolists.find((todolist) => todolist.id === todolistid);
 }
