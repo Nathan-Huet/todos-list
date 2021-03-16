@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export function register(store, payload){
     axios
-    .post("http://138.68.74.39/api/register?name="+payload.name+"&email="+payload.email+"&password="+payload.password)
+    .post("http://138.68.74.39/api/register",payload)
     .then(function (response) {
       // handle success
       console.log(response);
@@ -22,7 +22,7 @@ export function register(store, payload){
 
 export function login(store, payload){
     axios
-    .post("http://138.68.74.39/api/login?email="+payload.email+"&password="+payload.password)
+    .post("http://138.68.74.39/api/login",payload)
     .then(function (response) {
       // handle success
       //console.log(response);
