@@ -39,7 +39,7 @@ import ItemTodo from './ItemTodo.vue';
                 this.newTodo = ''
             },
             remove(todo){
-                var payload = {'todolist_id': this.id, 'id': todo}
+                var payloadd = {'todolist_id': this.id, 'id': todo}
                 this.removeTodo(payload)
             },
 
