@@ -23,3 +23,15 @@ export function edit_todo(state,payload){
     var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
     todolist.todos.find((todo) => todo.id === payload.todo.id).name = payload.editingTodo;
 }
+
+export function complete_Todo(state,payload){
+    var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
+    todolist.todos.find((todo) => todo.id === payload.todo.id).completed = payload.todo.completed;
+}
+
+export function add_todolist(state){
+    state.todolists.push({
+        id : state.todolists.length +1,
+        todos : [],
+    })
+}

@@ -75,3 +75,12 @@ export function fetchAllTodos(store) {
   }
 
 */
+
+export function completeTodo(store, payload){
+    store.commit('complete_Todo',payload)
+}
+
+export function addTodolist(store){
+    store.commit('add_todolist')
+}
+
