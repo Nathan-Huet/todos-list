@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-//headers: { Authorization: `Bearer ${token}` }
 export function addTodo(store, payload){
   axios
   .patch("http://138.68.74.39/api/todo/1",payload,{headers:{Token: store.getToken()}})
-  .then(function () {
+  .then(function (response) {
+    console.log(response);
     // handle success
     store.commit("add_todo", payload);
   })
@@ -18,6 +18,7 @@ export function addTodo(store, payload){
 }
 //l'api ne fait pas de sens
 export function removeTodo(store, payload){
+  
     store.commit('remove_todo',payload)
 }
 
@@ -39,13 +40,18 @@ export function editTodo(store, payload){
 }
 
 // du coup token pour id?
-export function fetchAllTodos(store) {
+export function fetchAllTodos({commit,rootGetters }) {
+
+
+  let token = rootGetters['account/getToken'];
+  console.log(token);
+
     axios
-      .get("http://138.68.74.39/api/todolists",{headers:{Token: store.getToken()}})
+      .get("http://138.68.74.39/api/todolists",{headers:{"Authorization": "Bearer " + token}})
       .then(function (response) {
         // handle success
         //console.log(response);
-        store.commit("load", response.data);
+        commit("load", response.data);
       })
       .catch(function (error) {
         // handle error

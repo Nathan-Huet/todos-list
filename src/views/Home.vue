@@ -55,9 +55,11 @@ export default {
     todolist : Todolist
   },
 
-
+  beforeMount(){
+        this.fetchAllTodos();
+    },
   methods:{
-    ...mapActions("todolist",{add_Todolist : 'addTodolist'}),
+    ...mapActions("todolist",[{add_Todolist : 'addTodolist'},"fetchAllTodos"]),
     addTodolist(){
       this.add_Todolist();
     }

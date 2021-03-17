@@ -1,7 +1,3 @@
-export function myGetter(state) {
-    return state.todolists.length;
-}
-
 export function todolists(state) {
     return state.todolists;
 }

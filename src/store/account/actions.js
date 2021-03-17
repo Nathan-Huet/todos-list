@@ -9,7 +9,7 @@ export function register(store, payload){
     .then(function (response) {
       // handle success
       console.log(response);
-      store.commit("register", response);
+      store.commit("register", response.data.token);
     })
     .catch(function (error) {
       // handle error
@@ -21,12 +21,13 @@ export function register(store, payload){
   }
 
 export function login(store, payload){
+  console.log(payload);
     axios
     .post("http://138.68.74.39/api/login",payload)
     .then(function (response) {
       // handle success
-      //console.log(response);
-      store.commit("login", response);
+      console.log(response.data.token);
+      store.commit("login", response.data.token);
     })
     .catch(function (error) {
       // handle error
