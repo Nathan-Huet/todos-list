@@ -1,37 +1,39 @@
 export function load(state, data) {
-    console.log(data);
+    //console.log(data);
     state.properties = data
 }
 
-export function add_todo(state, payload){
-    var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
+export function add_todo(state, response_data){
+    //console.log(response_data);
+    var todolist = state.todolists.find((todolist) => todolist.id === response_data.todolist_id);
     todolist.todos.push({
-        id : todolist.todos.length +1,
-        name : payload.name,
-        completed : false
+        id : response_data.id,
+        name : response_data.name,
+        completed : 0
     })
 }
 
 //stackOverflow
-export function remove_todo(state,payload){
-    var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
-    var i = todolist.todos.map(item => item.id).indexOf(payload.id);
+export function remove_todo(state,id,todolist_id){
+    var todolist = state.todolists.find((todolist) => todolist.id === todolist_id);
+    var i = todolist.todos.map(item => item.id).indexOf(id);
     todolist.todos.splice(i, 1);
 }
 
-export function edit_todo(state,payload){
+export function edit_todo(state,payload,todo_id){
     var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
-    todolist.todos.find((todo) => todo.id === payload.todo.id).name = payload.editingTodo;
+    todolist.todos.find((todo) => todo.id === todo_id).name = payload.name;
 }
 
-export function complete_Todo(state,payload){
+export function complete_Todo(state,payload,todo_id){
     var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
-    todolist.todos.find((todo) => todo.id === payload.todo.id).completed = payload.todo.completed;
+    todolist.todos.find((todo) => todo.id === todo_id).completed = payload.completed;
 }
 
-export function add_todolist(state){
+export function add_todolist(state,response_data){
     state.todolists.push({
-        id : state.todolists.length +1,
+        name: response_data.name,
+        id : response_data.id,
         todos : [],
     })
 }

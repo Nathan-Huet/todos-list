@@ -1,6 +1,5 @@
 <template>
   <div class="login">
-    <img alt="Vue logo" src="../assets/logo.png" />
     <p>Login</p>
   <login-with-acount></login-with-acount>
   <br>

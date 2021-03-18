@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    Il y a {{ myGetter }} todolist
+  <!--  Il y a {{ getNumberOfTodoLists }} todolist -->
    <!-- <ul class="todo-list">
             <li v-for="todo in todos" :key="todo.id"  >
               {{ todo.name }}
@@ -59,9 +58,9 @@ export default {
         this.fetchAllTodos();
     },
   methods:{
-    ...mapActions("todolist",[{add_Todolist : 'addTodolist'},"fetchAllTodos"]),
+    ...mapActions("todolist",["createTodolist","fetchAllTodos"]),
     addTodolist(){
-      this.add_Todolist();
+      this.createTodolist({name:"test"});
     }
 
   },

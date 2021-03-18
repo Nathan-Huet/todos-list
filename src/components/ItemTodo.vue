@@ -1,8 +1,8 @@
 <template>
     Name: {{ todo.name }}
-    <input type="checkbox" id="checkbox" v-model="todo.completed" v-on:change="complete(todo)">
+    <input type="checkbox" id="checkbox" v-model="checked" v-on:change="complete(todo)">
     <button v-on:click="remove()">Delete</button>
-    <input type="text" id="name" name="name" v-model="editingTodo">
+    <input type="text" id="name" name="name" v-model="editingTodoName">
     <button v-on:click="edit(todo)">Update</button>
 </template>
 
@@ -14,34 +14,45 @@ import { mapGetters, mapActions } from "vuex";
 
         data() {
             return {
-                editingTodo: ''
+                editingTodoName: '',
+                checked : false
             }
         },
         props: {
-            id: {type: String, default: "1"},
-            todolistid: {type: String, default: "1"},
+            id : {type: String},
+            todolistid: {type: String},
         },
         methods:{
-            ...mapActions("todolist",{editTodo : 'editTodo'}),
-            ...mapActions("todolist",{completeTodo : 'completeTodo'}),
+            ...mapActions("todolist",["editTodo","completeTodo","removeTodo"]),
+            completed(){
+                let completed = '0';
+                if(this.checked === true){
+                    completed = '1';
+                }return completed;
+            },
             remove(){
-                this.$emit('remove',this.id)
+                //this.$emit('remove',this.id) //emit?
+                console.log(this.id);
+                this.removeTodo(this.id, this.todolistid);
+
             },
             complete(todo){
-                var payload = {'todo': todo, 'todolist_id' : this.todolistid}
-                this.completeTodo(payload)
+                let payload = {'name': todo.name, 'todolist_id' : this.todolistid, 'completed': this.completed()};
+                this.completeTodo(payload);
             },            
             edit(todo){
-                var payload = {'todo': todo, 'editingTodo': this.editingTodo,'todolist_id' : this.todolistid}
-                this.editTodo(payload)
-            }
+                let payload = {'name': this.editingTodoName, 'completed': this.completed(),'todolist_id' : this.todolistid}
+                this.editTodo(payload,todo.id)
+            },
+
         },
         computed:{
             ...mapGetters('todolist', ['getTodo']),
 
             todo(){
                 return this.getTodo(this.todolistid,this.id)
-            }
+            },
+
         }
 
 

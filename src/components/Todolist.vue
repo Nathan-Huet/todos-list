@@ -6,6 +6,8 @@
         </li>
         <input type="text" id="name" name="name" v-model="newTodo">
         <button v-on:click="add()">ajouter</button>   
+        <button v-on:click="remove()">supprimer</button>   
+
     </ul>
     
 </template>
@@ -23,7 +25,7 @@ import ItemTodo from './ItemTodo.vue';
             }
         },
         props: {
-            id: {type: String, default: "1"},
+            id: {type: String},
             filter: {type: String, default: "all"}
         },
         components:{
@@ -34,7 +36,7 @@ import ItemTodo from './ItemTodo.vue';
             ...mapActions("todolist",{removeTodo : 'removeTodo'}),
 
             add(){
-                var payload = {'todolist_id': this.id, 'name': this.newTodo}
+                var payload = {'todolist_id': this.id, 'name': this.newTodo, 'completed':'0'}
                 this.addTodo(payload)
                 this.newTodo = ''
             },
