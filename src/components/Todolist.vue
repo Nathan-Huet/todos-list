@@ -32,17 +32,15 @@ import ItemTodo from './ItemTodo.vue';
             todo : ItemTodo,
         },
         methods:{
-            ...mapActions("todolist",{addTodo : 'addTodo'}),
-            ...mapActions("todolist",{removeTodo : 'removeTodo'}),
+            ...mapActions("todolist",['removeTodolist','addTodo']),
 
             add(){
                 var payload = {'todolist_id': this.id, 'name': this.newTodo, 'completed':'0'}
                 this.addTodo(payload)
                 this.newTodo = ''
             },
-            remove(todo){
-                var payload = {'todolist_id': this.id, 'id': todo}
-                this.removeTodo(payload)
+            remove(){
+                this.removeTodolist( this.id)
             },
 
         },

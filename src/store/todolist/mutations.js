@@ -13,21 +13,27 @@ export function add_todo(state, response_data){
     })
 }
 
-//stackOverflow
-export function remove_todo(state,id,todolist_id){
-    var todolist = state.todolists.find((todolist) => todolist.id === todolist_id);
-    var i = todolist.todos.map(item => item.id).indexOf(id);
+//stackOverflow id todolist_id
+export function remove_todo(state,payload){
+    var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
+    var i = todolist.todos.map(item => item.id).indexOf(payload.id);
     todolist.todos.splice(i, 1);
 }
 
-export function edit_todo(state,payload,todo_id){
-    var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
-    todolist.todos.find((todo) => todo.id === todo_id).name = payload.name;
+export function remove_todolist(state,id){
+    var i = state.todolists.map(item => item.id).indexOf(id);
+    state.todolists.splice(i, 1);
 }
 
-export function complete_Todo(state,payload,todo_id){
+
+export function edit_todo(state,payload){
     var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
-    todolist.todos.find((todo) => todo.id === todo_id).completed = payload.completed;
+    todolist.todos.find((todo) => todo.id === payload.todo_id).name = payload.name;
+}
+
+export function complete_Todo(state,payload){
+    var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
+    todolist.todos.find((todo) => todo.id === payload.id).completed = payload.completed;
 }
 
 export function add_todolist(state,response_data){

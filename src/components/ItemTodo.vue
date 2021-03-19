@@ -32,17 +32,17 @@ import { mapGetters, mapActions } from "vuex";
             },
             remove(){
                 //this.$emit('remove',this.id) //emit?
-                console.log(this.id);
-                this.removeTodo(this.id, this.todolistid);
+                this.removeTodo({id:this.id, todolist_id:this.todolistid});
 
             },
             complete(todo){
-                let payload = {'name': todo.name, 'todolist_id' : this.todolistid, 'completed': this.completed()};
+                let payload = {'name': todo.name, 'todolist_id' : this.todolistid, 'completed': this.completed(),'id':this.id};
+
                 this.completeTodo(payload);
             },            
             edit(todo){
-                let payload = {'name': this.editingTodoName, 'completed': this.completed(),'todolist_id' : this.todolistid}
-                this.editTodo(payload,todo.id)
+                let payload = {'name': this.editingTodoName, 'completed': this.completed(),'todolist_id' : this.todolistid,'todo_id':todo.id}
+                this.editTodo(payload)
             },
 
         },
