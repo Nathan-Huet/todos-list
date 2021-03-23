@@ -1,17 +1,31 @@
 <template>
   <div class="home">
   <!--  Il y a {{ getNumberOfTodoLists }} todolist -->
-
-  <button v-on:click="addTodolist()">ajouter une Todolist</button>   
-  <ul>
-    <li v-for="todolist in todolists" v-bind:key="todolist.id">
-      <todolist :id="todolist.id" :filter="filter"></todolist>
-    </li>
-  </ul>
-  <button v-on:click="this.filter = 'all'">all</button>
-  <button v-on:click="this.filter = 'done'">done</button>
-  <button v-on:click="this.filter = 'notDone'">notDone</button>
-
+  <table>
+    <tr>
+      <th scope="col">
+        Liste des Todolists
+      </th>
+      <th scope="col">
+        Todos
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <TodolistSideBar v-on:addTodolist="addTodolist"></TodolistSideBar>
+      </td>
+      <td>
+        <ul>
+          <li v-for="todolist in todolists" v-bind:key="todolist.id">
+            <todolist :id="todolist.id" :filter="filter"></todolist>
+          </li>
+        </ul>
+        <button v-on:click="changeFilter('all')">all</button>
+        <button v-on:click="changeFilter('done')">done</button>
+        <button v-on:click="changeFilter('notDone')">notDone</button>
+        </td> 
+    </tr>
+  </table>
   </div>
 </template>
 
@@ -20,6 +34,7 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 import { mapGetters, mapActions } from "vuex";
 import Todolist from '@/components/Todolist.vue';
+import TodolistSideBar from '@/components/TodolistSideBar.vue';
 
 export default {
   name: 'Home',
@@ -30,7 +45,9 @@ export default {
       }
   },
   components: {
-    todolist : Todolist
+    todolist : Todolist,
+    TodolistSideBar
+
   },
 
   beforeMount(){
@@ -40,8 +57,10 @@ export default {
     ...mapActions("todolist",["createTodolist","fetchAllTodos"]),
     addTodolist(){
       this.createTodolist({name:"test"});
+    },
+    changeFilter(newfilter){
+      this.filter = newfilter
     }
-
   },
 
   computed: {
@@ -49,3 +68,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+ul
+{
+    list-style-type: none;
+}
+
+</style>
