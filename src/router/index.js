@@ -1,13 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-
+import store from '../store'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/login',
@@ -20,5 +23,15 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if ( store.getters["account/isLoggedIn"]) {
+      next()
+      return
+    }
+    next('/login')
+  } else {
+    next()
+  }
+})
 export default router
