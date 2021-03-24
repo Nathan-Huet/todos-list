@@ -15,16 +15,16 @@ import { mapGetters, mapActions } from "vuex";
         data() {
             return {
                 editingTodoName: '',
-                checked : false
+                checked:  false
             }
         },
         props: {
-            id : {type: String},
-            todolistid: {type: String},
+            id : {type: Number},
+            todolistid: {type: Number},
         },
         methods:{
             ...mapActions("todolist",["editTodo","completeTodo","removeTodo"]),
-            completed(){
+            checkedToCompleted(){
                 let completed = '0';
                 if(this.checked === true){
                     completed = '1';
@@ -36,12 +36,13 @@ import { mapGetters, mapActions } from "vuex";
 
             },
             complete(todo){
-                let payload = {'name': todo.name, 'todolist_id' : this.todolistid, 'completed': this.completed(),'id':this.id};
+                let payload = {'name': todo.name, 'todolist_id' : this.todolistid, 'completed': this.checkedToCompleted(),'id':this.id};
 
                 this.completeTodo(payload);
+                console.log(this.completed);
             },            
             edit(todo){
-                let payload = {'name': this.editingTodoName, 'completed': this.completed(),'todolist_id' : this.todolistid,'todo_id':todo.id}
+                let payload = {'name': this.editingTodoName, 'completed': this.checkedToCompleted(),'todolist_id' : this.todolistid,'todo_id':todo.id}
                 this.editTodo(payload)
             },
 

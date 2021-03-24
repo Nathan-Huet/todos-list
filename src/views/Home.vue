@@ -12,7 +12,7 @@
     </tr>
     <tr>
       <td>
-        <TodolistSideBar v-on:addTodolist="addTodolist"></TodolistSideBar>
+        <TodolistSideBar></TodolistSideBar>
       </td>
       <td>
         <ul>
@@ -54,10 +54,8 @@ export default {
         this.fetchAllTodos();
     },
   methods:{
-    ...mapActions("todolist",["createTodolist","fetchAllTodos"]),
-    addTodolist(){
-      this.createTodolist({name:"test"});
-    },
+    ...mapActions("todolist",["fetchAllTodos"]),
+
     changeFilter(newfilter){
       this.filter = newfilter
     }

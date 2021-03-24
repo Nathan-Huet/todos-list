@@ -4,6 +4,8 @@
 import axios from 'axios';
 
 export function register(store, payload){
+  console.log(payload);
+
     axios
     .post("http://138.68.74.39/api/register",payload)
     .then(function (response) {

@@ -2,7 +2,7 @@
     ID: {{ todolist.id }}
     <ul>
         <li v-for="todo in filterToDo" v-bind:key="todo.id">
-            <todo :id="todo.id" :todolistid="todolist.id" @remove="remove"></todo>
+            <todo :id="todo.id" :todolistid="todolist.id"></todo>
         </li>
         <input type="text" id="name" name="name" v-model="newTodo">
         <button v-on:click="add()">ajouter</button>   
@@ -25,7 +25,7 @@ import ItemTodo from './ItemTodo.vue';
             }
         },
         props: {
-            id: {type: String},
+            id: {type: Number},
             filter: {type: String, default: "all"}
         },
         components:{
