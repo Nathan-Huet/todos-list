@@ -3,26 +3,26 @@
   <!--  Il y a {{ getNumberOfTodoLists }} todolist -->
   <table>
     <tr>
-      <th scope="col">
+      <th scope="col" class="col1">
         Liste des Todolists
       </th>
-      <th scope="col">
+      <th scope="col" class="col2">
         Todos
       </th>
     </tr>
     <tr>
-      <td>
+      <td class="td1">
         <TodolistSideBar></TodolistSideBar>
       </td>
       <td>
         <ul>
-          <li v-for="todolist in todolists" v-bind:key="todolist.id">
+          <li class="li1" v-for="todolist in todolists" v-bind:key="todolist.id">
             <todolist :id="todolist.id" :filter="filter"></todolist>
           </li>
         </ul>
-        <button v-on:click="changeFilter('all')">all</button>
-        <button v-on:click="changeFilter('done')">done</button>
-        <button v-on:click="changeFilter('notDone')">notDone</button>
+        <button v-on:click="changeFilter('all')">Tout afficher</button>
+        <button v-on:click="changeFilter('done')">Taches complétés</button>
+        <button v-on:click="changeFilter('notDone')">Taches non complétés</button>
         </td> 
     </tr>
   </table>
@@ -68,9 +68,45 @@ export default {
 </script>
 
 <style scoped>
-ul
-{
-    list-style-type: none;
+.home{
+  display: grid;
+  background-color:rgba(0,255,0,0.2);
+  
+}
+
+.col1{
+  grid-column:1;
+  grid-row:1;
+  background-color:rgba(0,255,0,0.35);
+  padding:1em;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 140%;
+}
+
+.col2{
+  grid-column:2/4;
+  grid-row:1;
+  background-color:rgba(0,255,0,0.35);
+  padding:1em;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 140%;
+  
+}
+.td1{
+  grid-column:1;
+  grid-row:2;
+  
+  
+}
+ul{
+  list-style: none;
+}
+.li1{
+  list-style:none;
+  grid-column:3/4;
+  grid-row:2;
+  
+  padding:1em;
 }
 
 </style>

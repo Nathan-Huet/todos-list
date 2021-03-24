@@ -1,12 +1,12 @@
 <template>
-    ID: {{ todolist.id }}
+    ID de la Liste: {{ todolist.id }}
     <ul>
         <li v-for="todo in filterToDo" v-bind:key="todo.id">
             <todo :id="todo.id" :todolistid="todolist.id" :checked_prop="todo.completed"></todo>
         </li>
-        <input type="text" id="name" name="name" v-model="newTodo">
-        <button v-on:click="add()">ajouter</button>   
-        <button v-on:click="remove()">supprimer</button>   
+        <input class="texti" type="text" id="name" name="name" v-model="newTodo">
+        <button class="boutton" v-on:click="add()">Ajouter</button>   
+        <button class="boutton" v-on:click="remove()">Supprimer</button>   
 
     </ul>
     
@@ -68,3 +68,23 @@ import ItemTodo from './ItemTodo.vue';
     }
 
 </script>
+
+<style>
+
+li{
+    list-style:none;
+}
+
+.texti{
+    border:none;
+}
+
+button{
+    border:none;
+    margin:5px 5px;
+    padding:5px;
+    background-color:rgba(182, 199, 176, 0.788);
+    border-radius:5px;
+    font-family: system-ui;
+}
+</style>

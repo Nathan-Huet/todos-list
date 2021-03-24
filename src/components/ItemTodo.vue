@@ -1,9 +1,9 @@
 <template>
-    Name: {{ todo.name }}
-    <input type="checkbox" id="checkbox" v-model="checked" v-on:change="complete(todo)">
-    <button v-on:click="remove()">Delete</button>
-    <input type="text" id="name" name="name" v-model="editingTodoName">
-    <button v-on:click="edit(todo)">Update</button>
+    <!--Name--> {{ todo.name }}
+    <input class="texti" type="checkbox" id="checkbox" v-model="checked" v-on:change="complete(todo)">
+    <button v-on:click="remove()">Effacer</button>
+    <input class="texti" type="text" id="name" name="name" v-model="editingTodoName">
+    <button v-on:click="edit(todo)">Mettre à jour</button>
 </template>
 
 <script>

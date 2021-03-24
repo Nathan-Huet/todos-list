@@ -1,8 +1,8 @@
 <template>
-    <button v-on:click="addTodolist()">ajouter une Todolist</button> 
+    <button v-on:click="addTodolist()">Ajouter une Todolist</button> 
     <ul>
-        <li v-for="todolist in todolists" v-bind:key="todolist.id">
-            {{ todolist.id.toString() }}
+        <li id="liste" v-for="todolist in todolists" v-bind:key="todolist.id">
+           ID : {{ todolist.id.toString() }}
         </li>
     </ul>
     
@@ -32,8 +32,11 @@ import { mapGetters, mapActions } from "vuex";
 </script>
 
 <style scoped>
-ul
+#liste
 {
-    list-style-type: none;
+    list-style-type: square;
+    border:double;
+    margin: 5px 0;
+    background-color:rgba(33, 97, 33, 0.35);
 }
 </style>

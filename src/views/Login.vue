@@ -15,3 +15,14 @@ export default {
   name: "Login",
 };
 </script>
+
+<style scoped>
+.login{
+  display:grid;
+  justify-content:center;
+}
+p{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size:150%;
+}
+</style>
