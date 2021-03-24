@@ -1,6 +1,9 @@
 export function todolists(state) {
     return state.todolists;
 }
+export function getTodos(state) {
+    return state.todolists;
+}
 export function getNumberOfTodoLists(state) {
     return state.todolists.length;
 }

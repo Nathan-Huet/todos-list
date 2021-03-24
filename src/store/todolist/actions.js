@@ -110,7 +110,7 @@ export function fetchAllTodos({ commit, rootGetters }) {
     .then(function(response) {
       // handle success
 
-      commit("load", response.data);
+      commit("load_todolists", response.data);
     })
     .catch(function(error) {
       // handle error
@@ -120,15 +120,14 @@ export function fetchAllTodos({ commit, rootGetters }) {
       // always executed
     });
 }
-/*
+
   
   export function fetchTodos(store, id) {
     axios
-      .get("http://138.68.74.39/api/todos/"+ id,{headers:{Token: store.getToken()}})
+      .get("http://138.68.74.39/api/todos/"+ id)
       .then(function (response) {
         // handle success
-        //console.log(response);
-        store.commit("setTodo", response.data);
+        store.commit("load_todos", response.data);
       })
       .catch(function (error) {
         // handle error
@@ -139,7 +138,7 @@ export function fetchAllTodos({ commit, rootGetters }) {
       });
   }
 
-*/
+
 
 
 export function completeTodo({ commit, rootGetters }, payload) {

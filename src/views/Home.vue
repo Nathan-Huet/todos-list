@@ -4,21 +4,20 @@
   <table>
     <tr>
       <th scope="col">
-        Liste des Todolists
+        Liste des Todolists 
       </th>
       <th scope="col">
-        Todos
+        Todolist id = {{selectedTodolist}}
       </th>
     </tr>
     <tr>
       <td>
-        <TodolistSideBar></TodolistSideBar>
+        <TodolistSideBar @selectTodolist="selectTodolist($event)"></TodolistSideBar>
       </td>
       <td>
         <ul>
-          <li v-for="todolist in todolists" v-bind:key="todolist.id">
-            <todolist :id="todolist.id" :filter="filter"></todolist>
-          </li>
+            <todolist :todolist_id="selectedTodolist" :filter="filter"></todolist>
+          
         </ul>
         <button v-on:click="changeFilter('all')">all</button>
         <button v-on:click="changeFilter('done')">done</button>
@@ -42,6 +41,7 @@ export default {
       return {
         newTodo : '',
         filter: "all",
+        selectedTodolist: 0
       }
   },
   components: {
@@ -52,12 +52,18 @@ export default {
 
   beforeMount(){
         this.fetchAllTodos();
+        this.fetchTodos(2450);
+
     },
   methods:{
-    ...mapActions("todolist",["fetchAllTodos"]),
+    ...mapActions("todolist",["fetchAllTodos","fetchTodos"]),
 
     changeFilter(newfilter){
       this.filter = newfilter
+    },
+    selectTodolist(id){
+      this.selectedTodolist = id;
+      this.fetchTodos(id);
     }
   },
 
