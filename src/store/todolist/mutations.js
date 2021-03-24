@@ -9,7 +9,7 @@ export function add_todo(state, response_data){
     todolist.todos.push({
         id : response_data.id,
         name : response_data.name,
-        completed : response_data.completed
+        completed : !!parseInt(response_data.completed)
     })
 }
 
@@ -33,7 +33,7 @@ export function edit_todo(state,payload){
 
 export function complete_Todo(state,payload){
     var todolist = state.todolists.find((todolist) => todolist.id === payload.todolist_id);
-    todolist.todos.find((todo) => todo.id === payload.id).completed = !!payload.completed;
+    todolist.todos.find((todo) => todo.id === payload.id).completed = !!parseInt(payload.completed);
 }
 
 export function add_todolist(state,response_data){

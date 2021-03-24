@@ -24,7 +24,6 @@ export function createTodolist({ commit, rootGetters }, payload) {
 
 export function addTodo({ commit, rootGetters }, payload) {
   let token = rootGetters["account/getToken"];
-  console.log(payload);
   axios
     .post("http://138.68.74.39/api/todo", payload, {
       headers: { Authorization: "Bearer " + token },
@@ -92,9 +91,8 @@ export function editTodo({ commit, rootGetters }, payload) {
     .patch("http://138.68.74.39/api/todo/"+payload.todo_id, payload, {
       headers: { Authorization: "Bearer " + token },
     })
-    .then(function(response) {
+    .then(function() {
       // handle success
-      console.log(response);
       commit("edit_todo", payload);
     })
     .catch(function(error) {
@@ -108,7 +106,6 @@ export function editTodo({ commit, rootGetters }, payload) {
 
 export function fetchAllTodos({ commit, rootGetters }) {
   let token = rootGetters["account/getToken"];
-  console.log(token);
 
   axios
     .get("http://138.68.74.39/api/todolists", {
@@ -151,7 +148,6 @@ export function fetchAllTodos({ commit, rootGetters }) {
 
 export function completeTodo({ commit, rootGetters }, payload) {
   let token = rootGetters["account/getToken"];
-  console.log(payload.id);
   axios
     .post("http://138.68.74.39/api/completeTodo/"+payload.id, payload, {
       headers: { Authorization: "Bearer " + token },

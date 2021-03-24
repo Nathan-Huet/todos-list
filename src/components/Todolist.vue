@@ -2,7 +2,7 @@
     ID: {{ todolist.id }}
     <ul>
         <li v-for="todo in filterToDo" v-bind:key="todo.id">
-            <todo :id="todo.id" :todolistid="todolist.id"></todo>
+            <todo :id="todo.id" :todolistid="todolist.id" :checked_prop="todo.completed"></todo>
         </li>
         <input type="text" id="name" name="name" v-model="newTodo">
         <button v-on:click="add()">ajouter</button>   
@@ -52,6 +52,7 @@ import ItemTodo from './ItemTodo.vue';
             },
 
             filterToDo() {
+                console.log(this.todolist.todos);
                 if (this.filter === "all") {
                     return this.todolist.todos;
                 } else if (this.filter === "done") {
