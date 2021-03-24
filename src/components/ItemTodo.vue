@@ -30,8 +30,6 @@ import { mapGetters, mapActions } from "vuex";
                 if(this.checked === true){
                     completed = '1';
                 }
-                console.log(completed);
-
                 return completed;
             },
             remove(){

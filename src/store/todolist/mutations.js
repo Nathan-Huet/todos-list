@@ -1,6 +1,11 @@
 export function load(state, data) {
     //console.log(data);
+    data.forEach(element => {
+        console.log(element);
+        
+    });
     state.properties = data
+
 }
 
 export function add_todo(state, response_data){

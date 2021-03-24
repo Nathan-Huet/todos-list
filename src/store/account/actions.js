@@ -13,12 +13,15 @@ export function register(store, payload){
     .then(function (response) {
       // handle success
       store.commit("register", response.data.token);
+      localStorage.setItem('token', response.data.token);
       router.push('/');
 
     })
     .catch(function (error) {
       // handle error
       console.log(error);
+      localStorage.removeItem('token');
+
     })
     .then(function () {
       // always executed
@@ -26,23 +29,29 @@ export function register(store, payload){
   }
 
 export function login(store, payload){
-  console.log(payload);
     axios
     .post("http://138.68.74.39/api/login",payload)
     .then(function (response) {
       // handle success
       store.commit("login", response.data.token);
+      localStorage.setItem('token', response.data.token);
       router.push('/');
     })
     .catch(function (error) {
       // handle error
+      localStorage.removeItem('token');
+      store.commit("logout");
       console.log(error);
     })
     .then(function () {
       // always executed
     });
   }
-
+export function logout({commit}){
+    commit('logout');
+    localStorage.removeItem('token');  
+  
+  }
 
 //pas dans action apparement
 /*

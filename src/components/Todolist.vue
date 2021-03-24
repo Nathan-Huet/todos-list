@@ -52,7 +52,6 @@ import ItemTodo from './ItemTodo.vue';
             },
 
             filterToDo() {
-                console.log(this.todolist.todos);
                 if (this.filter === "all") {
                     return this.todolist.todos;
                 } else if (this.filter === "done") {

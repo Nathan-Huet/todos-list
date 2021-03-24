@@ -1,12 +1,9 @@
 import axios from "axios";
 
-export function createTodolist({ commit, rootGetters }, payload) {
-  let token = rootGetters["account/getToken"];
+export function createTodolist({ commit }, payload) {
 
   axios
-    .post("http://138.68.74.39/api/todolist", payload, {
-      headers: { Authorization: "Bearer " + token },
-    })
+    .post("http://138.68.74.39/api/todolist", payload)
     .then(function(response) {
       // handle success
       commit("add_todolist",response.data);
@@ -29,7 +26,6 @@ export function addTodo({ commit, rootGetters }, payload) {
       headers: { Authorization: "Bearer " + token },
     })
     .then(function(response) {
-      console.log(response);
       // handle success
       commit("add_todo", response.data);
     })
@@ -113,7 +109,7 @@ export function fetchAllTodos({ commit, rootGetters }) {
     })
     .then(function(response) {
       // handle success
-      //console.log(response);
+
       commit("load", response.data);
     })
     .catch(function(error) {

@@ -3,6 +3,5 @@ export function getToken(state) {
 }
 
 export function isLoggedIn(state){
-    console.log(state.token)
-    return (state.token !== "null")
+    return (state.token !== "null");
 }
