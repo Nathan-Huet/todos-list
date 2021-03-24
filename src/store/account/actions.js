@@ -2,6 +2,8 @@
 //dans cet interceptor, on ajoute le token sous la forme d'un header : Authorization: Bearer $token
 
 import axios from 'axios';
+import router from '@/router/index';
+
 
 export function register(store, payload){
   console.log(payload);
@@ -10,8 +12,9 @@ export function register(store, payload){
     .post("http://138.68.74.39/api/register",payload)
     .then(function (response) {
       // handle success
-      console.log(response);
       store.commit("register", response.data.token);
+      router.push('/');
+
     })
     .catch(function (error) {
       // handle error
@@ -28,8 +31,8 @@ export function login(store, payload){
     .post("http://138.68.74.39/api/login",payload)
     .then(function (response) {
       // handle success
-      console.log(response.data.token);
       store.commit("login", response.data.token);
+      router.push('/');
     })
     .catch(function (error) {
       // handle error
