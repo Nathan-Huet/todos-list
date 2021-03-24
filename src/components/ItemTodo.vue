@@ -33,7 +33,6 @@ import { mapGetters, mapActions } from "vuex";
                 return completed;
             },
             remove(){
-                //this.$emit('remove',this.id) //emit?
                 this.removeTodo({id:this.id, todolist_id:this.todolistid});
 
             },
