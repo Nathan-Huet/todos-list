@@ -22,7 +22,7 @@ export default {
     ...mapActions("account", { login: "login" }),
     
     loginWithAcount() {
-        this.login({email:this.email,password:this.password}).then(()=>{this.$router.push('/') });
+        this.login({email:this.email,password:this.password}) ;
 
     },
 
