@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import store from '../store'
+import axios from "axios";
 
 const routes = [
   {
@@ -34,4 +35,6 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
+
 export default router
