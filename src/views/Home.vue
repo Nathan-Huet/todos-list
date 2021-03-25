@@ -16,7 +16,7 @@
       </td>
       <td>
         <ul class="li1">
-            <todolist v-if="selectedTodolist !== null" :todolist_id="selectedTodolist" :filter="filter"></todolist>
+            <todolist v-if="selectedTodolist !== null && getName !== ''" :todolist_id="selectedTodolist" :filter="filter"></todolist>
           
         </ul >
         <span v-if="selectedTodolist !== null">
