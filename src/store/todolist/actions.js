@@ -1,12 +1,9 @@
 import axios from "axios";
 
-export function createTodolist({ commit, rootGetters }, payload) {
-  let token = rootGetters["account/getToken"];
+export function createTodolist({ commit }, payload) {
 
   axios
-    .post("http://138.68.74.39/api/todolist", payload, {
-      headers: { Authorization: "Bearer " + token },
-    })
+    .post("http://138.68.74.39/api/todolist", payload)
     .then(function(response) {
       // handle success
       commit("add_todolist",response.data);
@@ -29,7 +26,6 @@ export function addTodo({ commit, rootGetters }, payload) {
       headers: { Authorization: "Bearer " + token },
     })
     .then(function(response) {
-      console.log(response);
       // handle success
       commit("add_todo", response.data);
     })
@@ -113,8 +109,8 @@ export function fetchAllTodos({ commit, rootGetters }) {
     })
     .then(function(response) {
       // handle success
-      //console.log(response);
-      commit("load", response.data);
+
+      commit("load_todolists", response.data);
     })
     .catch(function(error) {
       // handle error
@@ -124,15 +120,14 @@ export function fetchAllTodos({ commit, rootGetters }) {
       // always executed
     });
 }
-/*
+
   
   export function fetchTodos(store, id) {
     axios
-      .get("http://138.68.74.39/api/todos/"+ id,{headers:{Token: store.getToken()}})
+      .get("http://138.68.74.39/api/todos/"+ id)
       .then(function (response) {
         // handle success
-        //console.log(response);
-        store.commit("setTodo", response.data);
+        store.commit("load_todos", response.data);
       })
       .catch(function (error) {
         // handle error
@@ -143,7 +138,7 @@ export function fetchAllTodos({ commit, rootGetters }) {
       });
   }
 
-*/
+
 
 
 export function completeTodo({ commit, rootGetters }, payload) {

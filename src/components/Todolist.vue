@@ -1,14 +1,14 @@
 <template>
-    ID de la Liste: {{ todolist.id }}
     <ul>
+
         <li v-for="todo in filterToDo" v-bind:key="todo.id">
-            <todo :id="todo.id" :todolistid="todolist.id" :checked_prop="todo.completed"></todo>
+            <ItemTodo :id="todo.id" :todolistid="this.todolist_id" :checked_prop="!!parseInt(todo.completed)" :name="todo.name"></ItemTodo>
         </li>
         <input class="texti" type="text" id="name" name="name" v-model="newTodo">
         <button class="boutton" v-on:click="add()">Ajouter</button>   
         <button class="boutton" v-on:click="remove()">Supprimer</button>   
 
-    </ul>
+    </ul> 
     
 </template>
 
@@ -25,43 +25,41 @@ import ItemTodo from './ItemTodo.vue';
             }
         },
         props: {
-            id: {type: Number},
+            todolist_id: {type: Number},
             filter: {type: String, default: "all"}
         },
         components:{
-            todo : ItemTodo,
+            ItemTodo : ItemTodo,
         },
         methods:{
             ...mapActions("todolist",['removeTodolist','addTodo']),
 
             add(){
-                var payload = {'todolist_id': this.id, 'name': this.newTodo, 'completed':'0'}
+                var payload = {'todolist_id': this.todolist_id, 'name': this.newTodo, 'completed':'0'}
                 this.addTodo(payload)
                 this.newTodo = ''
             },
             remove(){
-                this.removeTodolist( this.id)
+                this.removeTodolist( this.todolist_id)
             },
 
         },
         computed:{
-            ...mapGetters('todolist', ['getTodolist']),
+            ...mapGetters('todolist', ['getTodos']),
 
-            todolist(){
-                return this.getTodolist(this.id)
-            },
+
 
             filterToDo() {
-                console.log(this.todolist.todos);
                 if (this.filter === "all") {
-                    return this.todolist.todos;
+                    return this.getTodos;
                 } else if (this.filter === "done") {
-                    return this.todolist.todos.filter((todo) => todo.completed);
+                    return this.getTodos.filter((todo) => todo.completed);
                 } else if (this.filter === "notDone") {
-                    return this.todolist.todos.filter((todo) => !todo.completed);
+                    return this.getTodos.filter((todo) => !todo.completed );
                 }
                 return [];
             },
+            
         }
 
 

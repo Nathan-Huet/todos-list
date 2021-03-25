@@ -4,25 +4,26 @@
   <table>
     <tr>
       <th scope="col" class="col1">
-        Liste des Todolists
+        Liste des Todolists 
       </th>
-      <th scope="col" class="col2">
-        Todos
+      <th scope="col"  class="col2" v-if="selectedTodolist !== null">
+        Todolist id = {{selectedTodolist}}
       </th>
     </tr>
     <tr>
       <td class="td1">
-        <TodolistSideBar></TodolistSideBar>
+        <TodolistSideBar  @selectTodolist="selectTodolist($event)"></TodolistSideBar>
       </td>
       <td>
-        <ul>
-          <li class="li1" v-for="todolist in todolists" v-bind:key="todolist.id">
-            <todolist :id="todolist.id" :filter="filter"></todolist>
-          </li>
-        </ul>
-        <button v-on:click="changeFilter('all')">Tout afficher</button>
-        <button v-on:click="changeFilter('done')">Taches complétés</button>
-        <button v-on:click="changeFilter('notDone')">Taches non complétés</button>
+        <ul class="li1">
+            <todolist v-if="selectedTodolist !== null" :todolist_id="selectedTodolist" :filter="filter"></todolist>
+          
+        </ul >
+        <span v-if="selectedTodolist !== null">
+        <button v-on:click="changeFilter('all')">all</button>
+        <button v-on:click="changeFilter('done')">done</button>
+        <button v-on:click="changeFilter('notDone')">notDone</button>
+        </span>
         </td> 
     </tr>
   </table>
@@ -42,6 +43,7 @@ export default {
       return {
         newTodo : '',
         filter: "all",
+        selectedTodolist: null
       }
   },
   components: {
@@ -52,17 +54,26 @@ export default {
 
   beforeMount(){
         this.fetchAllTodos();
+        //this.fetchTodos(2450);
+        //this.selectedTodolist = this.todolists[0].id
+
     },
+
   methods:{
-    ...mapActions("todolist",["fetchAllTodos"]),
+    ...mapActions("todolist",["fetchAllTodos","fetchTodos"]),
 
     changeFilter(newfilter){
       this.filter = newfilter
+    },
+    selectTodolist(id){
+      this.selectedTodolist = id;
+      this.fetchTodos(id);
     }
   },
 
   computed: {
-      ...mapGetters("todolist", ['todolists'])
+      ...mapGetters("todolist", ['todolists']),
+
     }
 }
 </script>

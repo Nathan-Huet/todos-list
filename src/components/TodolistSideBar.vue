@@ -1,8 +1,8 @@
 <template>
     <button v-on:click="addTodolist()">Ajouter une Todolist</button> 
     <ul>
-        <li id="liste" v-for="todolist in todolists" v-bind:key="todolist.id">
-           ID : {{ todolist.id.toString() }}
+        <li v-for="todolist in todolists" v-bind:key="todolist.id" v-on:click="selectTodolist(todolist.id)">
+            {{ todolist.id.toString() }}
         </li>
     </ul>
     
@@ -13,10 +13,16 @@ import { mapGetters, mapActions } from "vuex";
 
     export default {
         name: 'TodolistSideBar',
+        selectedTodolist : 0,
+        emits: ["selectTodolist"],
+
         methods:{
             ...mapActions("todolist",["createTodolist"]),
             addTodolist(){
             this.createTodolist({name:"test"});
+            },
+            selectTodolist(id){
+                this.$emit('selectTodolist', id)
             }
 
 

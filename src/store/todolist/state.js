@@ -1,5 +1,6 @@
 export default function () {
     return {
-        todolists: []
+        todolists: [],
+        todos: []
     }
 }
