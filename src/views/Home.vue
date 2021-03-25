@@ -70,8 +70,12 @@ export default {
 
   computed: {
       ...mapGetters("todolist", ['todolists',"getTodolist"]),
-      getName(){    return this.todolists.find((todolist) => todolist.id === this.selectedTodolist).name;}
-
+      getName(){ 
+        let name = this.todolists.find((todolist) => todolist.id === this.selectedTodolist);
+        if(name){return name.name}
+        else {return "";}
+        //return this.todolists.find((todolist) => todolist.id === this.selectedTodolist).name;}
+      }
     }
 }
 </script>
