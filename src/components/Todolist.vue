@@ -2,8 +2,8 @@
 
     <ul>
         
-        <li v-for="todo in this.todos" v-bind:key="todo.id">
-            <todo :id="todo.id" :todolistid="this.todolist_id" :checked_prop="todo.completed"></todo>
+        <li v-for="todo in getTodos" v-bind:key="todo.id">
+            <ItemTodo :id="todo.id" :todolistid="this.todolist_id" :checked_prop="!!parseInt(todo.completed)" :name="todo.name"></ItemTodo>
         </li>
         <input type="text" id="name" name="name" v-model="newTodo">
         <button v-on:click="add()">ajouter</button>   
@@ -30,7 +30,7 @@ import ItemTodo from './ItemTodo.vue';
             filter: {type: String, default: "all"}
         },
         components:{
-            todo : ItemTodo,
+            ItemTodo : ItemTodo,
         },
         methods:{
             ...mapActions("todolist",['removeTodolist','addTodo']),
@@ -46,20 +46,24 @@ import ItemTodo from './ItemTodo.vue';
 
         },
         computed:{
-            ...mapGetters('todos', ['getTodos']),
+            ...mapGetters('todolist', ['getTodos']),
 
 
 
             filterToDo() {
+                console.log(this.filter);
+                console.log("tttt");
+
                 if (this.filter === "all") {
-                    return this.todos;
+                    return this.getTodos;
                 } else if (this.filter === "done") {
-                    return this.todos.filter((todo) => todo.completed);
+                    return this.getTodos.filter((todo) => todo.completed === "1");
                 } else if (this.filter === "notDone") {
-                    return this.todos.filter((todo) => !todo.completed);
+                    return this.getTodos.filter((todo) => !todo.completed ==="0");
                 }
                 return [];
             },
+            
         }
 
 

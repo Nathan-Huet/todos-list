@@ -11,9 +11,7 @@ export function add_todo(state, response_data){
     //console.log(response_data);
     //var todolist = state.todolists.find((todolist) => todolist.id === response_data.todolist_id);
     state.todos.push({
-        id : response_data.id,
-        name : response_data.name,
-        completed : !!parseInt(response_data.completed)
+        response_data
     })
 }
 
@@ -42,7 +40,6 @@ export function complete_Todo(state,payload){
 
 export function add_todolist(state,response_data){
     state.todolists.push({
-        name: response_data.name,
-        id : response_data.id,
+        response_data
     })
 }

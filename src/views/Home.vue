@@ -6,22 +6,24 @@
       <th scope="col">
         Liste des Todolists 
       </th>
-      <th scope="col">
+      <th scope="col" v-if="selectedTodolist !== null">
         Todolist id = {{selectedTodolist}}
       </th>
     </tr>
     <tr>
       <td>
-        <TodolistSideBar @selectTodolist="selectTodolist($event)"></TodolistSideBar>
+        <TodolistSideBar  @selectTodolist="selectTodolist($event)"></TodolistSideBar>
       </td>
       <td>
         <ul>
-            <todolist :todolist_id="selectedTodolist" :filter="filter"></todolist>
+            <todolist v-if="selectedTodolist !== null" :todolist_id="selectedTodolist" :filter="filter"></todolist>
           
-        </ul>
+        </ul >
+        <span v-if="selectedTodolist !== null">
         <button v-on:click="changeFilter('all')">all</button>
         <button v-on:click="changeFilter('done')">done</button>
         <button v-on:click="changeFilter('notDone')">notDone</button>
+        </span>
         </td> 
     </tr>
   </table>
@@ -41,7 +43,7 @@ export default {
       return {
         newTodo : '',
         filter: "all",
-        selectedTodolist: 0
+        selectedTodolist: null
       }
   },
   components: {
@@ -52,9 +54,11 @@ export default {
 
   beforeMount(){
         this.fetchAllTodos();
-        this.fetchTodos(2450);
+        //this.fetchTodos(2450);
+        //this.selectedTodolist = this.todolists[0].id
 
     },
+
   methods:{
     ...mapActions("todolist",["fetchAllTodos","fetchTodos"]),
 
@@ -68,7 +72,8 @@ export default {
   },
 
   computed: {
-      ...mapGetters("todolist", ['todolists'])
+      ...mapGetters("todolist", ['todolists']),
+
     }
 }
 </script>
