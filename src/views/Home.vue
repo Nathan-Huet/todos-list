@@ -7,7 +7,7 @@
         Liste des Todolists 
       </th>
       <th scope="col"  class="col2" v-if="selectedTodolist !== null">
-        Todolist id = {{selectedTodolist}}
+        Todolist name = {{getName}}
       </th>
     </tr>
     <tr>
@@ -54,9 +54,6 @@ export default {
 
   beforeMount(){
         this.fetchAllTodos();
-        //this.fetchTodos(2450);
-        //this.selectedTodolist = this.todolists[0].id
-
     },
 
   methods:{
@@ -72,7 +69,8 @@ export default {
   },
 
   computed: {
-      ...mapGetters("todolist", ['todolists']),
+      ...mapGetters("todolist", ['todolists',"getTodolist"]),
+      getName(){    return this.todolists.find((todolist) => todolist.id === this.selectedTodolist).name;}
 
     }
 }

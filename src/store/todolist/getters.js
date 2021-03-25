@@ -14,6 +14,3 @@ export const getTodo = (state) => (todolistid,todoid) => {
     return todo;
 }
 
-export const getTodolist = (state) => (todolistid) => {
-    return state.todolists.find((todolist) => todolist.id === todolistid);
-}
