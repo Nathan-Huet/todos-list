@@ -1,8 +1,8 @@
 <template>
 
     <ul>
-        
-        <li v-for="todo in getTodos" v-bind:key="todo.id">
+
+        <li v-for="todo in filterToDo" v-bind:key="todo.id">
             <ItemTodo :id="todo.id" :todolistid="this.todolist_id" :checked_prop="!!parseInt(todo.completed)" :name="todo.name"></ItemTodo>
         </li>
         <input type="text" id="name" name="name" v-model="newTodo">
@@ -51,15 +51,12 @@ import ItemTodo from './ItemTodo.vue';
 
 
             filterToDo() {
-                console.log(this.filter);
-                console.log("tttt");
-
                 if (this.filter === "all") {
                     return this.getTodos;
                 } else if (this.filter === "done") {
-                    return this.getTodos.filter((todo) => todo.completed === "1");
+                    return this.getTodos.filter((todo) => todo.completed);
                 } else if (this.filter === "notDone") {
-                    return this.getTodos.filter((todo) => !todo.completed ==="0");
+                    return this.getTodos.filter((todo) => !todo.completed );
                 }
                 return [];
             },
